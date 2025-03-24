@@ -29,10 +29,12 @@ public class ChatClient {
         int port = -1;
 
         while (socket == null || !socket.isConnected()) {
-            System.out.print("Enter local port: ");
+            System.out.print("Enter server IP address: ");
+            String serverAddress = scanner.nextLine();
+            System.out.print("Enter server port: ");
             try {
                 port = Integer.parseInt(scanner.nextLine());
-                socket = new Socket("localhost", port);
+                socket = new Socket(serverAddress, port);
                 if (socket.isConnected()) {
                     System.out.println("Connection established.");
                 }

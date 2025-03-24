@@ -25,7 +25,8 @@ public class ChatServer {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(0);
-            System.out.println("Server started on port " + serverSocket.getLocalPort());
+            String serverAddress = InetAddress.getLocalHost().getHostAddress();
+            System.out.println("Server live on IP address " + serverAddress + " port " + serverSocket.getLocalPort());
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
@@ -52,7 +53,8 @@ public class ChatServer {
                 out = new PrintWriter(socket.getOutputStream(), true);
 
                 clientName = in.readLine();
-                System.out.println(clientName + " has connected.");
+                String clientAddress = socket.getInetAddress().getHostAddress();
+                System.out.println(clientName + " has connected from IP address " + clientAddress);
                 out.println("\nWelcome to chat room, " + clientName + "!\n");
 
                 synchronized (clientHandlers) {
